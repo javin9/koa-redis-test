@@ -2,7 +2,7 @@
 
  安装redis 容器
 ```bash
-docker run --name redis-koa redis
+docker run  -d  --name redis-koa redis
 ```
 构建demo镜像
 ``` bash
