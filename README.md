@@ -26,3 +26,10 @@ YARN_VERSION=1.22.19
 REDIS_WEB_PORT=tcp://172.18.0.2:6379
 REDIS_WEB_NAME=/koa-web/redis-web
 ```
+
+### 测试
+```bash
+curl http://127.0.0.1:8080/get
+curl http://127.0.0.1:8080/remove
+curl http://127.0.0.1:8080/regenerate
+```
