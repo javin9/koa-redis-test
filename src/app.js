@@ -1,8 +1,8 @@
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
-const koa = require('koa')
+const Koa = require('koa')
+const app = new Koa()
 
-const app = koa()
 app.keys = ['keys', 'keykeys']
 app.use(session({
   store: redisStore({
