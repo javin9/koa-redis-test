@@ -33,3 +33,8 @@ curl http://127.0.0.1:8080/get
 curl http://127.0.0.1:8080/remove
 curl http://127.0.0.1:8080/regenerate
 ```
+
+查看日志
+```bash
+docker logs koa-demo
+```

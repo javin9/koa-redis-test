@@ -1,46 +1,41 @@
-const session = require('koa-generic-session')
-const redisStore = require('koa-redis')
-const Koa = require('koa')
-const app = new Koa()
+var koa = require('koa')
+var session = require('koa-generic-session')
+var RedisStore = require('koa-redis')
 
+var app = new koa()
 app.keys = ['keys', 'keykeys']
 app.use(session({
-  store: redisStore({
+  store: new RedisStore({
     host: process.env.REDIS_WEB_PORT_6379_TCP_ADDR || "127.0.0.1",
     port: 6379
-  })
+  }),
+  errorHandler (err) {
+    console.log("connect failed")
+    console.log(err)
+  }
 }))
 
-app.use(function* () {
-  switch (this.path) {
+app.use(ctx => {
+  switch (ctx.path) {
     case '/get':
-      get.call(this)
+      get(ctx)
       break
     case '/remove':
-      remove.call(this)
-      break
-    case '/regenerate':
-      yield regenerate.call(this)
+      remove(ctx)
       break
   }
 })
 
-function get () {
-  const session = this.session
+function get (ctx) {
+  var session = ctx.session
   session.count = session.count || 0
   session.count++
-  this.body = session.count
+  ctx.body = session.count
 }
 
-function remove () {
-  this.session = null
-  this.body = 0
-}
-
-function* regenerate () {
-  get.call(this)
-  yield this.regenerateSession()
-  get.call(this)
+function remove (ctx) {
+  ctx.session = null
+  ctx.body = 0
 }
 
 app.listen(8080)
