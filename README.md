@@ -12,10 +12,17 @@ docker build -t rupid/koa-test .
 ```
 创建容器，并link到redis容器
 ```bash
-docker run -d --name koa-test --link redis-web -p 3000:3000 redis-web rupid/koa-test
+docker run -d --name koa-test --link redis-web -p 8080:8080 redis-web rupid/koa-test
 ```
 
 ```bash
 docker exec -it koa-demo /lib/sh
-env
+root@fd31d89ab869:/app# env
+# ip地址
+REDIS_WEB_PORT_6379_TCP_ADDR=172.18.0.2
+REDIS_WEB_ENV_REDIS_VERSION=7.0.2
+HOSTNAME=fd31d89ab869
+YARN_VERSION=1.22.19
+REDIS_WEB_PORT=tcp://172.18.0.2:6379
+REDIS_WEB_NAME=/koa-web/redis-web
 ```
