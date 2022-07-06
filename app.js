@@ -6,9 +6,8 @@ const app = new Koa()
 app.keys = ['keys', 'keykeys']
 app.use(session({
   store: redisStore({
-    host: '127.0.0.1',
-    port: 8888,
-    password: '123456'
+    host: process.env.REDIS_WEB_PORT_6379_TCP_ADDR || "127.0.0.1",
+    port: 6379
   })
 }))
 

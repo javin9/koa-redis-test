@@ -14,3 +14,8 @@ docker build -t rupid/koa-test .
 ```bash
 docker run -d --name koa-test --link redis-web -p 3000:3000 redis-web rupid/koa-test
 ```
+
+```bash
+docker exec -it koa-demo /lib/sh
+env
+```
